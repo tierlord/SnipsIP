@@ -1,24 +1,17 @@
 #!/usr/bin/env python3
 
-import netifaces as ni
+import socket
 from hermes_python.hermes import Hermes
 
 def get_ip (hermes, message):
     msg = ""
-    try: 
-        ni.ifaddresses('eth0')
-        ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
-        print("IP : ", ip)
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
         msg = "Meine Adresse lautet: " + ip
     except:
-        try:
-            ni.ifaddresses('wlan0')
-            ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
-            print("IP : ", ip)
-            msg = "Meine Adresse lautet: " + ip
-        except:
-            msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
-            print("Unable to get Hostname and IP") 
+        msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
 
     hermes.publish_end_session(message.session_id, msg)
 
