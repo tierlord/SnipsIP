@@ -10,7 +10,7 @@ def get_ip (hermes, message):
         msg = "Meine Adresse lautet: " + ipv4
     except:
         try:
-            ipv4 = os.popen('ip addr show eth0').read().split("inet ")[1].split("/")[0]
+            ipv4 = os.popen('ip addr show wlan0').read().split("inet ")[1].split("/")[0]
             msg = "Meine Adresse lautet: " + ipv4
         except:
             msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
