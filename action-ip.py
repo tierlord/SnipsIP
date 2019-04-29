@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 
-import socket
+import os
 from hermes_python.hermes import Hermes
 
 def get_ip (hermes, message):
     msg = ""
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        ip = s.getsockname()[0]
-        msg = "Meine Adresse lautet: " + ip
+        ipv4 = os.popen('ip addr show eth0').read().split("inet ")[1].split("/")[0]
+        msg = "Meine Adresse lautet: " + ipv4
     except:
-        msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
+        try:
+            ipv4 = os.popen('ip addr show eth0').read().split("inet ")[1].split("/")[0]
+            msg = "Meine Adresse lautet: " + ipv4
+        except:
+            msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
 
     hermes.publish_end_session(message.session_id, msg)
 
