@@ -15,7 +15,7 @@ def get_ip (hermes, message):
         except:
             msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
 
-    hermes.publish_end_session(message.session_id, msg)
+    return hermes.publish_end_session(message.session_id, msg)
 
 with Hermes("localhost:1883") as h:
     h \
