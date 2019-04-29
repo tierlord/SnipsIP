@@ -11,8 +11,14 @@ def get_ip (hermes, message):
         print("IP : ", ip)
         msg = "Meine Adresse lautet: " + ip
     except:
-        msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
-        print("Unable to get Hostname and IP") 
+        try:
+            ni.ifaddresses('wlan0')
+            ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
+            print("IP : ", ip)
+            msg = "Meine Adresse lautet: " + ip
+        except:
+            msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
+            print("Unable to get Hostname and IP") 
 
     hermes.publish_end_session(message.session_id, msg)
 
