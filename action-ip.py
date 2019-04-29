@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-import socket
+import netifaces as ni
 from hermes_python.hermes import Hermes
 
 def get_ip (hermes, message):
     msg = ""
     try: 
-        host_name = socket.gethostname() 
-        host_ip = socket.gethostbyname(host_name) 
-        print("IP : ",host_ip)
-        msg = "Meine Adresse lautet: " + host_ip
+        ni.ifaddresses('eth0')
+        ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+        print("IP : ", ip)
+        msg = "Meine Adresse lautet: " + ip
     except:
         msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
         print("Unable to get Hostname and IP") 
