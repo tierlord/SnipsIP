@@ -9,8 +9,8 @@ def split_ip (ip):
     msg = ""
 
     for part in range(4):
-        for i in range (len(part)):
-            msg += part[i] + " "
+        for i in range (len(ip_arr[part])):
+            msg += ip_arr[part][i] + " "
         if part < 4:
             msg += "punkt "
     
