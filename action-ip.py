@@ -11,11 +11,10 @@ def split_ip (ip):
     for part in range(4):
         for i in range (len(ip_arr[part])):
             msg += ip_arr[part][i] + " "
-        if part < 4:
+        if part < 3:
             msg += "punkt "
     
     return msg
-            
 
 def get_ip (hermes, message):
     msg = ""
