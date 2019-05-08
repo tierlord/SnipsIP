@@ -8,10 +8,11 @@ def split_ip (ip):
 
     msg = ""
 
-    for part in ip_arr:
+    for part in range(4):
         for i in range (len(part)):
             msg += part[i] + " "
-        msg += "punkt "
+        if part < 4:
+            msg += "punkt "
     
     return msg
             
@@ -24,7 +25,7 @@ def get_ip (hermes, message):
     except:
         try:
             ipv4 = os.popen('ip addr show wlan0').read().split("inet ")[1].split("/")[0]
-            msg = "Meine WLAN Adresse lautet: " + split_ip(ipv4)
+            msg = "Meine W LAN Adresse lautet: " + split_ip(ipv4)
         except:
             msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
 
