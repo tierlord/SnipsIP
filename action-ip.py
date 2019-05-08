@@ -24,7 +24,7 @@ def get_ip (hermes, message):
     except:
         try:
             ipv4 = os.popen('ip addr show wlan0').read().split("inet ")[1].split("/")[0]
-            msg = "Meine W LAN Adresse lautet: " + split_ip(ipv4)
+            msg = "Meine Welahn Adresse lautet: " + split_ip(ipv4)
         except:
             msg = "Tut mir leid, das kann ich dir gerade selbst nicht sagen."
 
